@@ -1,19 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import ReactDOM from 'react-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider } from '@material-ui/core/styles';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import theme from './theme';
+import { Provider } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom';
+import configureStore from './store/store';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+const store = configureStore();
+
+ReactDOM.render(
+  <Provider store={store}>
+  <ThemeProvider theme={theme}>
+    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+    <CssBaseline />
+      <Router>
+        <App />
+      </Router>
+  </ThemeProvider>
+  </Provider>,
+  document.querySelector('#root'),
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
